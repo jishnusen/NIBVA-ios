@@ -9,6 +9,8 @@
 import UIKit
 import CoreBluetooth
 
+var readings = [Int](repeating: Int(), count: 64)
+
 class BluetoothView: UIViewController, UITextViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate {
     var centralManager: CBCentralManager?
     var peripheralTest: CBPeripheral?
@@ -123,7 +125,11 @@ class BluetoothView: UIViewController, UITextViewDelegate, CBCentralManagerDeleg
         for i in 0..<8 {
             for j in 0..<9 {
                 if characteristicUUID[i][j] == characteristic.uuid {
-                    DataView.updateDiode(led: i, diode: j, value: interpretReading(characteristic))
+                    let readValue = interpretReading(characteristic)
+                    DataView.updateDiode(led: i, diode: j, value: String(readValue))
+                    if j < 8 { //  Only store diodes for now until the server is updated to hold LEDs
+                        readings[(i * 8) + j] = readValue
+                    }
                     if i == 7 && j == 8 {
                         DispatchQueue.main.async {
                             self.readLabel.text = "Done reading after notify!"
@@ -134,12 +140,12 @@ class BluetoothView: UIViewController, UITextViewDelegate, CBCentralManagerDeleg
         }
     }
     
-    func interpretReading(_ characteristic: CBCharacteristic) -> String {
+    func interpretReading(_ characteristic: CBCharacteristic) -> Int {
         let readValue = characteristic.value
         
         // If sent data is zero it's interpretted as a nullptr, which we don't want
         if (readValue!.count == 0) {
-            return "0"
+            return 0
         }
         
         var pointer = UnsafeMutablePointer<UInt8>(mutating: (readValue! as NSData).bytes.bindMemory(to: UInt8.self, capacity: readValue!.count))
@@ -148,7 +154,7 @@ class BluetoothView: UIViewController, UITextViewDelegate, CBCentralManagerDeleg
         let val = CFSwapInt16LittleToHost(anUInt16Pointer.pointee)
         pointer = pointer.advanced(by: 2)
         
-        return String(val)
+        return Int(val)
     }
     
     @IBAction func onManualRefreshTap(_ sender: Any) {

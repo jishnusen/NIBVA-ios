@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,6 +22,7 @@
                     <connections>
                         <segue destination="0xN-yp-chy" kind="relationship" relationship="viewControllers" id="eNr-GI-O68"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="dvA-tX-AHh"/>
+                        <segue destination="jlI-la-xFc" kind="relationship" relationship="viewControllers" id="Dhy-Df-4Xj"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oYl-lo-A3X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -30,7 +32,7 @@
         <!--Bluetooth-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="BluetoothView" customModule="SimpleBLE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="BluetoothView" customModule="NIBVA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -85,7 +87,7 @@
         <!--LEDs-->
         <scene sceneID="Hcp-mS-7vi">
             <objects>
-                <tableViewController id="0xN-yp-chy" customClass="DataView" customModule="SimpleBLE" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="0xN-yp-chy" customClass="DataView" customModule="NIBVA" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="EO5-MU-RGz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,9 +123,99 @@
             </objects>
             <point key="canvasLocation" x="-660" y="191"/>
         </scene>
+        <!--Cloud-->
+        <scene sceneID="03x-29-L4A">
+            <objects>
+                <viewController id="jlI-la-xFc" customClass="SignInView" customModule="NIBVA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nxf-Me-rmf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XtD-we-3Lv">
+                                <rect key="frame" x="148" y="291" width="78" height="30"/>
+                                <state key="normal" title="Disconnect"/>
+                                <connections>
+                                    <action selector="didTapDisconnect:" destination="jlI-la-xFc" eventType="touchUpInside" id="aFh-UR-aHY"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oez-hj-HhC">
+                                <rect key="frame" x="16" y="329" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAo-tv-mt0">
+                                <rect key="frame" x="157" y="253" width="60" height="30"/>
+                                <state key="normal" title="Sign Out"/>
+                                <connections>
+                                    <action selector="didTapSignOut:" destination="jlI-la-xFc" eventType="touchUpInside" id="a2T-SR-gRG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0O-eU-0Jh">
+                                <rect key="frame" x="164" y="215" width="47" height="30"/>
+                                <state key="normal" title="Sign In"/>
+                                <connections>
+                                    <action selector="didTapSignIn:" destination="jlI-la-xFc" eventType="touchUpInside" id="HkA-ul-U2f"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vq5-dL-fm7">
+                                <rect key="frame" x="137" y="440" width="102" height="30"/>
+                                <state key="normal" title="Push Readings"/>
+                                <connections>
+                                    <action selector="didTapPushReadings:" destination="jlI-la-xFc" eventType="touchUpInside" id="8oL-hS-LeL"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmc-nP-EeK">
+                                <rect key="frame" x="16" y="478" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Qmc-nP-EeK" firstAttribute="leading" secondItem="rv9-j1-NZY" secondAttribute="leading" constant="16" id="25U-cg-PHM"/>
+                            <constraint firstItem="vq5-dL-fm7" firstAttribute="leading" secondItem="rv9-j1-NZY" secondAttribute="leading" constant="137" id="4Of-DS-gD6"/>
+                            <constraint firstItem="rv9-j1-NZY" firstAttribute="trailing" secondItem="XtD-we-3Lv" secondAttribute="trailing" constant="149" id="E64-mS-1yU"/>
+                            <constraint firstItem="XtD-we-3Lv" firstAttribute="leading" secondItem="rv9-j1-NZY" secondAttribute="leading" constant="148" id="FuZ-QF-P5F"/>
+                            <constraint firstItem="vAo-tv-mt0" firstAttribute="leading" secondItem="rv9-j1-NZY" secondAttribute="leading" constant="157" id="GCo-rs-hoj"/>
+                            <constraint firstItem="rv9-j1-NZY" firstAttribute="trailing" secondItem="Oez-hj-HhC" secondAttribute="trailing" constant="16" id="Gq6-4K-Lu0"/>
+                            <constraint firstItem="rv9-j1-NZY" firstAttribute="bottom" secondItem="vq5-dL-fm7" secondAttribute="bottom" constant="148" id="Ky1-Bt-bpd"/>
+                            <constraint firstItem="rv9-j1-NZY" firstAttribute="bottom" secondItem="Qmc-nP-EeK" secondAttribute="bottom" constant="119" id="L7w-It-rEe"/>
+                            <constraint firstItem="p0O-eU-0Jh" firstAttribute="top" secondItem="rv9-j1-NZY" secondAttribute="top" constant="195" id="SDH-kP-UyT"/>
+                            <constraint firstItem="rv9-j1-NZY" firstAttribute="trailing" secondItem="vq5-dL-fm7" secondAttribute="trailing" constant="136" id="T1q-HZ-WX5"/>
+                            <constraint firstItem="Oez-hj-HhC" firstAttribute="top" secondItem="XtD-we-3Lv" secondAttribute="bottom" constant="8" id="V4j-FE-M66"/>
+                            <constraint firstItem="p0O-eU-0Jh" firstAttribute="leading" secondItem="rv9-j1-NZY" secondAttribute="leading" constant="164" id="Xj0-pe-lbr"/>
+                            <constraint firstItem="rv9-j1-NZY" firstAttribute="trailing" secondItem="vAo-tv-mt0" secondAttribute="trailing" constant="158" id="boJ-wJ-cFb"/>
+                            <constraint firstItem="vAo-tv-mt0" firstAttribute="top" secondItem="p0O-eU-0Jh" secondAttribute="bottom" constant="8" id="dLI-Pb-sZy"/>
+                            <constraint firstItem="rv9-j1-NZY" firstAttribute="trailing" secondItem="Qmc-nP-EeK" secondAttribute="trailing" constant="16" id="gOe-1X-8p2"/>
+                            <constraint firstItem="XtD-we-3Lv" firstAttribute="top" secondItem="vAo-tv-mt0" secondAttribute="bottom" constant="8" id="kUe-NM-kcb"/>
+                            <constraint firstItem="vq5-dL-fm7" firstAttribute="top" secondItem="Oez-hj-HhC" secondAttribute="bottom" constant="90" id="nAY-hN-BsW"/>
+                            <constraint firstItem="rv9-j1-NZY" firstAttribute="trailing" secondItem="p0O-eU-0Jh" secondAttribute="trailing" constant="164" id="oqO-V2-TFv"/>
+                            <constraint firstItem="rv9-j1-NZY" firstAttribute="bottom" secondItem="Oez-hj-HhC" secondAttribute="bottom" constant="268" id="sNV-63-fs4"/>
+                            <constraint firstItem="Oez-hj-HhC" firstAttribute="leading" secondItem="rv9-j1-NZY" secondAttribute="leading" constant="16" id="szw-Zm-DHs"/>
+                            <constraint firstItem="Qmc-nP-EeK" firstAttribute="top" secondItem="vq5-dL-fm7" secondAttribute="bottom" constant="8" id="tUb-hL-BaN"/>
+                            <constraint firstItem="rv9-j1-NZY" firstAttribute="bottom" secondItem="Qmc-nP-EeK" secondAttribute="bottom" constant="119" id="vcB-F4-jUw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rv9-j1-NZY"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Cloud" image="Cloud" id="9PJ-hH-EvQ"/>
+                    <connections>
+                        <outlet property="disconnectButton" destination="XtD-we-3Lv" id="9PP-at-jr2"/>
+                        <outlet property="pushText" destination="Qmc-nP-EeK" id="e3q-Dc-zj8"/>
+                        <outlet property="signInButton" destination="p0O-eU-0Jh" id="dvO-mD-kbt"/>
+                        <outlet property="signOutButton" destination="vAo-tv-mt0" id="R1Y-G8-J51"/>
+                        <outlet property="statusText" destination="Oez-hj-HhC" id="lxB-Pr-4FD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OuM-ei-ICX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1316" y="727.28635682158927"/>
+        </scene>
     </scenes>
     <resources>
         <image name="BLELogo" width="25" height="21"/>
+        <image name="Cloud" width="25" height="25"/>
         <image name="DataLogo" width="25" height="25"/>
     </resources>
 </document>

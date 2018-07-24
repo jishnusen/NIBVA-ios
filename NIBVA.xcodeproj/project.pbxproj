@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B065FBC2106C93500F9B644 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B065FBB2106C93500F9B644 /* SignInView.swift */; };
 		3B9AC7042103D2E80097A826 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9AC7032103D2E80097A826 /* AppDelegate.swift */; };
 		3B9AC7062103D2E80097A826 /* BluetoothView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9AC7052103D2E80097A826 /* BluetoothView.swift */; };
 		3B9AC7092103D2E80097A826 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B9AC7072103D2E80097A826 /* Main.storyboard */; };
 		3B9AC70B2103D2F20097A826 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B9AC70A2103D2F20097A826 /* Assets.xcassets */; };
 		3B9AC70E2103D2F20097A826 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B9AC70C2103D2F20097A826 /* LaunchScreen.storyboard */; };
 		3BC66D192104D608005C2EB6 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC66D182104D608005C2EB6 /* DataView.swift */; };
+		C8FBD70A374AA38D2961676D /* Pods_NIBVA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D3A48AD47D2D4F9AC735D2 /* Pods_NIBVA.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B065FBB2106C93500F9B644 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		3B9AC7002103D2E70097A826 /* NIBVA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NIBVA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B9AC7032103D2E80097A826 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B9AC7052103D2E80097A826 /* BluetoothView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothView.swift; sourceTree = "<group>"; };
@@ -25,6 +28,9 @@
 		3B9AC70F2103D2F20097A826 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BC66D122103DF00005C2EB6 /* BlueCapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BlueCapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BC66D182104D608005C2EB6 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
+		50E13EFB20EFAE599FA4E17B /* Pods-NIBVA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NIBVA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NIBVA/Pods-NIBVA.debug.xcconfig"; sourceTree = "<group>"; };
+		98D3A48AD47D2D4F9AC735D2 /* Pods_NIBVA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NIBVA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA5D293B1E0B7B3759D31DF6 /* Pods-NIBVA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NIBVA.release.xcconfig"; path = "Pods/Target Support Files/Pods-NIBVA/Pods-NIBVA.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,18 +38,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8FBD70A374AA38D2961676D /* Pods_NIBVA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12CECDAA7B71F2B206BB7A89 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				50E13EFB20EFAE599FA4E17B /* Pods-NIBVA.debug.xcconfig */,
+				DA5D293B1E0B7B3759D31DF6 /* Pods-NIBVA.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3B9AC6F72103D2E70097A826 = {
 			isa = PBXGroup;
 			children = (
 				3B9AC7022103D2E70097A826 /* NIBVA */,
 				3B9AC7012103D2E70097A826 /* Products */,
 				721427689D0AEECDB41462F3 /* Frameworks */,
+				12CECDAA7B71F2B206BB7A89 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +82,7 @@
 				3B9AC70A2103D2F20097A826 /* Assets.xcassets */,
 				3B9AC70C2103D2F20097A826 /* LaunchScreen.storyboard */,
 				3B9AC70F2103D2F20097A826 /* Info.plist */,
+				3B065FBB2106C93500F9B644 /* SignInView.swift */,
 			);
 			path = NIBVA;
 			sourceTree = "<group>";
@@ -73,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				3BC66D122103DF00005C2EB6 /* BlueCapKit.framework */,
+				98D3A48AD47D2D4F9AC735D2 /* Pods_NIBVA.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -84,9 +103,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3B9AC7122103D2F20097A826 /* Build configuration list for PBXNativeTarget "NIBVA" */;
 			buildPhases = (
+				531C2DB668D0CD1EFCC434F0 /* [CP] Check Pods Manifest.lock */,
 				3B9AC6FC2103D2E70097A826 /* Sources */,
 				3B9AC6FD2103D2E70097A826 /* Frameworks */,
 				3B9AC6FE2103D2E70097A826 /* Resources */,
+				4A246D96CDE0043E1F0DED82 /* [CP] Embed Pods Frameworks */,
+				98421921042F973507EC6A40 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -148,6 +170,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4A246D96CDE0043E1F0DED82 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-NIBVA/Pods-NIBVA-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NIBVA/Pods-NIBVA-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		531C2DB668D0CD1EFCC434F0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NIBVA-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		98421921042F973507EC6A40 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-NIBVA/Pods-NIBVA-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NIBVA/Pods-NIBVA-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3B9AC6FC2103D2E70097A826 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -155,6 +238,7 @@
 			files = (
 				3BC66D192104D608005C2EB6 /* DataView.swift in Sources */,
 				3B9AC7062103D2E80097A826 /* BluetoothView.swift in Sources */,
+				3B065FBC2106C93500F9B644 /* SignInView.swift in Sources */,
 				3B9AC7042103D2E80097A826 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,6 +383,7 @@
 		};
 		3B9AC7132103D2F20097A826 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50E13EFB20EFAE599FA4E17B /* Pods-NIBVA.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -318,6 +403,7 @@
 		};
 		3B9AC7142103D2F20097A826 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA5D293B1E0B7B3759D31DF6 /* Pods-NIBVA.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
