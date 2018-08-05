@@ -80,7 +80,7 @@ class BluetoothView: UIViewController, UITextViewDelegate, CBCentralManagerDeleg
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print(peripheral.name!)
+        //print(peripheral.name!)
 
         peripheralTest = peripheral
         peripheralTest?.delegate = self
@@ -105,14 +105,14 @@ class BluetoothView: UIViewController, UITextViewDelegate, CBCentralManagerDeleg
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         for service in peripheral.services! {
-            print("Service: \(service)")
+            //print("Service: \(service)")
             peripheral.discoverCharacteristics(nil, for: service) // Find every characteristic
         }
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         for characteristic in service.characteristics! {
-            print(characteristic)
+            //print(characteristic)
             peripheral.readValue(for: characteristic)
             peripheral.setNotifyValue(true, for: characteristic)
         }
@@ -142,19 +142,28 @@ class BluetoothView: UIViewController, UITextViewDelegate, CBCentralManagerDeleg
     
     func interpretReading(_ characteristic: CBCharacteristic) -> Int {
         let readValue = characteristic.value
+        print(readValue!.count)
         
         // If sent data is zero it's interpretted as a nullptr, which we don't want
         if (readValue!.count == 0) {
             return 0
         }
         
-        var pointer = UnsafeMutablePointer<UInt8>(mutating: (readValue! as NSData).bytes.bindMemory(to: UInt8.self, capacity: readValue!.count))
+        var val = 0
         
-        let anUInt16Pointer = UnsafeMutablePointer<UInt16>(OpaquePointer(pointer))
-        let val = CFSwapInt16LittleToHost(anUInt16Pointer.pointee)
-        pointer = pointer.advanced(by: 2)
+        for i in 0..<8 {
+            let idx = i * 32
+            var pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: 32)
+            (readValue! as NSData).getBytes(pointer, range: NSMakeRange(idx, 32))
+            print(pointer.pointee)
+            //bytes.bindMemory(to: UInt8.self, capacity: readValue!.count))
         
-        return Int(val)
+            let anUInt32Pointer = UnsafeMutablePointer<UInt32>(OpaquePointer(pointer))
+            val = Int(CFSwapInt32LittleToHost(anUInt32Pointer.pointee))
+            pointer = pointer.advanced(by: 4)
+            return Int(val)
+        }
+        return -1
     }
     
     @IBAction func onManualRefreshTap(_ sender: Any) {
