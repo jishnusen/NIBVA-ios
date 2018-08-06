@@ -24,7 +24,12 @@ class BluetoothView: UIViewController, UITextViewDelegate, CBCentralManagerDeleg
                         CBUUID(string: "ec06"),
                         CBUUID(string: "ec07")]
     
-    var characteristicUUID = [[CBUUID]](repeating: [CBUUID](repeating: CBUUID(), count: 9), count: 8)
+    var characteristicUUID = [[CBUUID]](repeating: [CBUUID](repeating: CBUUID(), count: 3), count: 8)
+    
+    var readValues = [Int](repeating: Int(), count: 9)
+    var part1 = [Int](repeating: Int(), count: 4) // Diodes 1-4
+    var part2 = [Int](repeating: Int(), count: 4) // Diodes 5-8
+    var part3 = [Int](repeating: Int(), count: 1) // LED Intensity
     
     public enum AppError : Error {
         case dataCharacteristicNotFound
@@ -47,7 +52,7 @@ class BluetoothView: UIViewController, UITextViewDelegate, CBCentralManagerDeleg
         centralManager = CBCentralManager(delegate: self, queue: centralQueue)
         
         for i in 0..<8 {
-            for j in 0..<9 {
+            for j in 0..<3 {
                 characteristicUUID[i][j] = CBUUID(string: "ec\(i+1)\(j)")
             }
         }
@@ -80,8 +85,6 @@ class BluetoothView: UIViewController, UITextViewDelegate, CBCentralManagerDeleg
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        //print(peripheral.name!)
-
         peripheralTest = peripheral
         peripheralTest?.delegate = self
         
@@ -105,14 +108,12 @@ class BluetoothView: UIViewController, UITextViewDelegate, CBCentralManagerDeleg
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         for service in peripheral.services! {
-            //print("Service: \(service)")
             peripheral.discoverCharacteristics(nil, for: service) // Find every characteristic
         }
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         for characteristic in service.characteristics! {
-            //print(characteristic)
             peripheral.readValue(for: characteristic)
             peripheral.setNotifyValue(true, for: characteristic)
         }
@@ -122,48 +123,60 @@ class BluetoothView: UIViewController, UITextViewDelegate, CBCentralManagerDeleg
         DispatchQueue.main.async {
             self.readLabel.text = "Reading..."
         }
+        
+
+        var cnt = 0
+        
         for i in 0..<8 {
-            for j in 0..<9 {
+            for j in 0..<3 {
                 if characteristicUUID[i][j] == characteristic.uuid {
-                    let readValue = interpretReading(characteristic)
-                    DataView.updateDiode(led: i, diode: j, value: String(readValue))
-                    if j < 8 { //  Only store diodes for now until the server is updated to hold LEDs
-                        readings[(i * 8) + j] = readValue
+                    if j == 0 {
+                        part1 = interpretReading(characteristic, isLED: j == 2)
+                    } else if j == 1 {
+                        part2 = interpretReading(characteristic, isLED: j == 2)
+                    } else {
+                        part3 = interpretReading(characteristic, isLED: j == 2)
+                        readValues = part1 + part2 + part3
+                        for k in 0..<9 {
+                            DataView.updateDiode(led: i, diode: k, value: String(readValues[k]))
+                        }
                     }
-                    if i == 7 && j == 8 {
+                    
+                    if i == 7 && j == 2 {
                         DispatchQueue.main.async {
                             self.readLabel.text = "Done reading after notify!"
                         }
+                    }
+                    cnt += 1
+                    if (j == 2) {
+                        cnt = 0
                     }
                 }
             }
         }
     }
     
-    func interpretReading(_ characteristic: CBCharacteristic) -> Int {
+    func interpretReading(_ characteristic: CBCharacteristic, isLED: Bool) -> [Int] {
         let readValue = characteristic.value
         print(readValue!.count)
         
-        // If sent data is zero it's interpretted as a nullptr, which we don't want
+        // If sent data is zero it's interpreted as a nullptr, which we don't want
         if (readValue!.count == 0) {
-            return 0
+            return [0]
         }
         
-        var val = 0
+        let end = isLED ? 1 : 4
+        var val = [Int](repeating: Int(), count: end)
         
-        for i in 0..<8 {
+        for i in 0..<end {
             let idx = i * 32
-            var pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: 32)
+            let pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: 32)
             (readValue! as NSData).getBytes(pointer, range: NSMakeRange(idx, 32))
-            print(pointer.pointee)
-            //bytes.bindMemory(to: UInt8.self, capacity: readValue!.count))
         
             let anUInt32Pointer = UnsafeMutablePointer<UInt32>(OpaquePointer(pointer))
-            val = Int(CFSwapInt32LittleToHost(anUInt32Pointer.pointee))
-            pointer = pointer.advanced(by: 4)
-            return Int(val)
+            val[i] = Int(CFSwapInt32LittleToHost(anUInt32Pointer.pointee))
         }
-        return -1
+        return val
     }
     
     @IBAction func onManualRefreshTap(_ sender: Any) {
